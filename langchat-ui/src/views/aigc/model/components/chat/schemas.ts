@@ -61,7 +61,7 @@ const baseSchemas: FormSchema[] = [
     label: 'Api Key',
     labelMessage: '模型的ApiKey',
     component: 'NInput',
-    rules: [{ required: true, message: '请输入API Key', trigger: ['blur'] }],
+    // rules: [{ required: true, message: '请输入API Key', trigger: ['blur'] }],
     componentProps: {
       placeholder: '请输入Api Key',
     },
@@ -127,6 +127,19 @@ export function getSchemas(provider: string) {
     },
   };
   list.splice(1, 0, modelSchema);
+
+  if (provider === ProviderEnum.Q_FAN) {
+    list.splice(2, 0, {
+      field: 'secretKey',
+      label: 'Api Secret',
+      labelMessage: '模型的ApiSecret',
+      component: 'NInput',
+      rules: [{ required: true, message: '请输入Api Secret', trigger: ['blur'] }],
+      componentProps: {
+        placeholder: '请输入Api Secret',
+      },
+    });
+  }
 
   let defaultValue: any = undefined;
   let labelMessage: any = '模型的基础请求URL地址（或中转地址）';
